@@ -1,0 +1,26 @@
+{
+    "name": "saintsweeto/nz-post",
+    "description": "A PHP wrapper for NZ Post API",
+    "type": "library",
+    "keywords": [
+        "nz-post",
+        "nz-post api",
+        "nz-post php wrapper"
+    ],
+    "require": {
+        "symfony/cache": "^5.1",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "EJ Ramos",
+            "email": "emjohnramos@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hiraya\\": "src/"
+        }
+    }
+}

@@ -29,20 +29,6 @@ class ParcelAddress extends Auth
     }
 
     /**
-     * Returns the detailed information for a single dpid.
-     *
-     * @param $dpid
-     * @return array|bool|float|int|object|string|null
-     * @throws GuzzleException
-     */
-    public function getAddressByDpid($dpid)
-    {
-        $uri = "/domestic/addresses/dpid/$dpid";
-
-        return $this->call(self::BASE_URI.$uri);
-    }
-
-    /**
      * Returns the detailed information for a single domestic address identifier.
      *
      * @param $address_id
@@ -52,6 +38,20 @@ class ParcelAddress extends Auth
     public function getAddressByAddressId($address_id)
     {
         $uri = "/domestic/addresses/$address_id";
+
+        return $this->call(self::BASE_URI.$uri);
+    }
+
+    /**
+     * Returns the detailed information for a single dpid.
+     *
+     * @param $dpid
+     * @return array|bool|float|int|object|string|null
+     * @throws GuzzleException
+     */
+    public function getAddressByDpid($dpid)
+    {
+        $uri = "/domestic/addresses/dpid/$dpid";
 
         return $this->call(self::BASE_URI.$uri);
     }

@@ -46,7 +46,7 @@ class Auth extends Client
      *
      * @throws InvalidArgumentException
      */
-    public function setCachedToken()
+    protected function setCachedToken()
     {
         $cache = new FilesystemAdapter();
         $token = $cache->getItem('nz.post.access.token')->get();
@@ -68,7 +68,7 @@ class Auth extends Client
      * @return array|bool|float|int|object|string|null
      * @throws GuzzleException
      */
-    public function getAccessToken()
+    protected function getAccessToken()
     {
         $response = $this->post(self::BASE_URI, [
             'form_params' => [
@@ -77,6 +77,35 @@ class Auth extends Client
                 'client_secret' => '78a2eBF2cD5843A58B682b6DbAc1B3fa',
             ],
         ])->getBody()->getContents();
+        return \GuzzleHttp\json_decode($response);
+    }
+
+    /**
+     * Call an endpoint.
+     *
+     * @param $uri
+     * @param null $query
+     * @return array|bool|float|int|object|string|null
+     * @throws GuzzleException
+     */
+    protected function call($uri, $query = null)
+    {
+        $options = [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $this->token,
+            ],
+        ];
+
+        if ($query) {
+            $options = array_merge($options, [
+                'query' => $query,
+            ]);
+        }
+
+        $response = $this->get($uri, $options)
+            ->getBody()
+            ->getContents();
+
         return \GuzzleHttp\json_decode($response);
     }
 }
